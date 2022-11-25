@@ -1,4 +1,4 @@
-import SongBar from './SongBar';
+import SongBar from "./SongBar";
 
 const RelatedSongs = ({
   data,

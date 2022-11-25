@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { DetailsHeader, Error, Loader, RelatedSongs } from "../components";
 
-import { setActiveSong, playPause } from '../redux/features/playerSlice';
+import { setActiveSong, playPause } from "../redux/features/playerSlice";
 import {
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
-} from '../redux/services/shazamCore';
+} from "../redux/services/shazamCore";
 
 const SongDetails = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const SongDetails = () => {
         <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
 
         <div className="mt-5">
-          {songData?.sections[1].type === 'LYRICS' ? (
+          {songData?.sections[1].type === "LYRICS" ? (
             songData?.sections[1]?.text.map((line, i) => (
               <p
                 key={`lyrics-${line}-${i}`}

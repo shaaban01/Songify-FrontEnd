@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const DetailsHeader = ({ artistId, artistData, songData }) => (
   <div className="relative w-full flex flex-col">
@@ -10,8 +10,8 @@ const DetailsHeader = ({ artistId, artistData, songData }) => (
         src={
           artistId
             ? artistData?.artists[artistId].attributes?.artwork?.url
-                .replace('{w}', '500')
-                .replace('{h}', '500')
+                .replace("{w}", "500")
+                .replace("{h}", "500")
             : songData?.images?.coverart
         }
         className="sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black"
