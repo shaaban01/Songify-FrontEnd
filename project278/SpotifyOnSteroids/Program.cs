@@ -1,10 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 //Add connection string
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source = paginationDb";
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source = paginationDb";
 
 //Add a context to the services collection
-builder.Services.AddSqlServer<SpotifyOnSteroids.Contexts.ApplicationDbContext>(connectionString);
+//builder.Services.AddSqlServer<SpotifyOnSteroids.Contexts.ApplicationDbContext>(connectionString);
 
 // Add services to the container.
 
