@@ -1,11 +1,11 @@
-import React from "react";
-import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
+import React from 'react';
+import { MdSkipNext, MdSkipPrevious, MdFavorite } from 'react-icons/md';
 import {
   BsArrowRepeat,
   BsFillPauseFill,
   BsFillPlayFill,
   BsShuffle,
-} from "react-icons/bs";
+} from 'react-icons/bs';
 
 const Controls = ({
   isPlaying,
@@ -13,6 +13,8 @@ const Controls = ({
   setRepeat,
   shuffle,
   setShuffle,
+  favorite,
+  setFavorite,
   currentSongs,
   handlePlayPause,
   handlePrevSong,
@@ -21,7 +23,7 @@ const Controls = ({
   <div className="flex items-center justify-around md:w-36 lg:w-52 2xl:w-80">
     <BsArrowRepeat
       size={20}
-      color={repeat ? "red" : "white"}
+      color={repeat ? 'red' : 'white'}
       onClick={() => setRepeat((prev) => !prev)}
       className="hidden sm:block cursor-pointer"
     />
@@ -58,8 +60,15 @@ const Controls = ({
     )}
     <BsShuffle
       size={20}
-      color={shuffle ? "red" : "white"}
+      color={shuffle ? 'red' : 'white'}
       onClick={() => setShuffle((prev) => !prev)}
+      className="hidden sm:block cursor-pointer"
+    />
+
+    <MdFavorite
+      size={20}
+      color={favorite ? 'red' : 'white'}
+      onClick={() => setFavorite((prev) => !prev)}
       className="hidden sm:block cursor-pointer"
     />
   </div>
