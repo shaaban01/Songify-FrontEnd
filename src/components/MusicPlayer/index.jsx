@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   nextSong,
   prevSong,
   playPause,
-} from "../../redux/features/playerSlice";
-import Controls from "./Controls";
-import Player from "./Player";
-import Seekbar from "./Seekbar";
-import Track from "./Track";
-import VolumeBar from "./VolumeBar";
+} from '../../redux/features/playerSlice';
+import Controls from './Controls';
+import Player from './Player';
+import Seekbar from './Seekbar';
+import Track from './Track';
+import VolumeBar from './VolumeBar';
 
 const MusicPlayer = () => {
   const { activeSong, currentSongs, currentIndex, isActive, isPlaying } =
@@ -21,6 +21,7 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.3);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const [favorite, setFavorite] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,6 +73,8 @@ const MusicPlayer = () => {
           setRepeat={setRepeat}
           shuffle={shuffle}
           setShuffle={setShuffle}
+          favorite={favorite}
+          setFavorite={setFavorite}
           currentSongs={currentSongs}
           handlePlayPause={handlePlayPause}
           handlePrevSong={handlePrevSong}
