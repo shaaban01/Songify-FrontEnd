@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RiCloseLine } from "react-icons/ri";
 import { HiOutlineMenu } from "react-icons/hi";
+import { BiLogOut } from "react-icons/bi";
 import { logo } from "../assets";
 import { links } from "../assets/constants";
 
 const NavLinks = ({ handleClick }) => {
+  const navigate = useNavigate();
+
+  function onLogout() {
+    localStorage.removeItem("token");
+    navigate("/discover");
+  }
   return (
     <div className="mt-10 ">
       {links.map((item) => (
@@ -19,6 +26,14 @@ const NavLinks = ({ handleClick }) => {
           {item.name}
         </NavLink>
       ))}
+
+      <div
+        className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-[#84ACCE]"
+        onClick={onLogout}
+      >
+        <BiLogOut className="w-6 h-6 mr-2" />
+        Logout
+      </div>
     </div>
   );
 };

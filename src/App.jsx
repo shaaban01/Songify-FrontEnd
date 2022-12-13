@@ -1,5 +1,11 @@
 import { useSelector } from "react-redux";
-import { Route, Routes, Navigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  matchRoutes,
+  useLocation,
+} from "react-router-dom";
 
 import { Searchbar, Sidebar, MusicPlayer, TopPlay } from "./components";
 import {
@@ -10,41 +16,107 @@ import {
   Search,
   SongDetails,
   TopCharts,
+  Login,
+  Signup,
 } from "./pages";
-
 const App = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+
+  const isAuthenticated =
+    localStorage.getItem("token") !== null &&
+    localStorage.getItem("token") !== undefined;
   const { activeSong } = useSelector((state) => state.player);
 
+  const PrivateRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/login" />;
+  };
   return (
     <div className="relative flex">
-      <Sidebar />
+      {isAuthenticated && location.pathname !== "/login" && <Sidebar />}
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#561E7C]">
-        <Searchbar />
+        {isAuthenticated && location.pathname !== "/login" && <Searchbar />}
 
         <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
           <div className="flex-1 h-fit pb-40">
             <Routes>
-              <Route index path="/discover" element={<Discover />} />
-              <Route path="/top-artists" element={<TopArtists />} />
-              <Route path="/top-charts" element={<TopCharts />} />
-              <Route path="/around-you" element={<AroundYou />} />
-              <Route path="/artists/:id" element={<ArtistDetails />} />
-              <Route path="/songs/:songid" element={<SongDetails />} />
-              <Route path="/search/:searchTerm" element={<Search />} />
-              <Route path="/" element={<Navigate to="/discover" replace />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Signup />} />
+              {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
+              <Route
+                index
+                path="/discover"
+                element={
+                  <PrivateRoute>
+                    <Discover />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/top-artists"
+                element={
+                  <PrivateRoute>
+                    <TopArtists />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/top-charts"
+                element={
+                  <PrivateRoute>
+                    <TopCharts />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/around-you"
+                element={
+                  <PrivateRoute>
+                    <AroundYou />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/artists/:id"
+                element={
+                  <PrivateRoute>
+                    <ArtistDetails />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/songs/:songid"
+                element={
+                  <PrivateRoute>
+                    <SongDetails />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/search/:searchTerm"
+                element={
+                  <PrivateRoute>
+                    <Search />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </div>
-          <div className="xl:sticky relative top-0 h-fit">
-            <TopPlay />
-          </div>
+          {isAuthenticated && location.pathname !== "/login" && (
+            <div className="xl:sticky relative top-0 h-fit">
+              <TopPlay />
+            </div>
+          )}
         </div>
       </div>
 
-      {activeSong?.title && (
-        <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
-          <MusicPlayer />
-        </div>
-      )}
+      {activeSong?.title &&
+        isAuthenticated &&
+        location.pathname !== "/login" && (
+          <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+            <MusicPlayer />
+          </div>
+        )}
     </div>
   );
 };
