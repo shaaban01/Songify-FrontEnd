@@ -35,9 +35,9 @@ function Login() {
   };
 
   return (
-    <div class="flex justify-center items-center main-container">
-      <div class="w-1/2 shadow-lg p-5 rounded bg-white">
-        <p class="font-bold text-2xl text-center mt-3 mb-8">Login</p>
+    <div class="flex justify-center mt-20	items-center main-container h-full " >
+      <div class="w-1/2 shadow-lg p-5 rounded bg-white align-middle">
+        <p class="font-bold text-2xl text-center mt-3 mb-8">LOGIN</p>
         <div class="mb-3">
           <label>Username</label>
           <br />
@@ -61,14 +61,12 @@ function Login() {
           />
         </div>
         <button
-          class="block bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-white pt-3 pb-3 pl-6 pr-6 rounded w-full mt-5"
+          class="block bg-gradient-to-r from-purple-400 via-violet-800 to-indigo-900 text-white pt-3 pb-3 pl-6 pr-6 rounded w-full mt-5"
           onClick={onLogin}
         >
           LOGIN
         </button>
-        {/* <a href="./signup.html" class="mt-6 mb-3 text-center block">
-          Don't have an account?
-        </a> */}
+        
 
         <Link to={`/register/`}>
           <p className="mt-6 mb-3 text-center block"> Don't have an account?</p>
