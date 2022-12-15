@@ -7,6 +7,8 @@ import {
   BsShuffle,
 } from 'react-icons/bs';
 
+import { RiPlayListAddFill } from 'react-icons/ri';
+
 const Controls = ({
   isPlaying,
   repeat,
@@ -21,6 +23,12 @@ const Controls = ({
   handleNextSong,
 }) => (
   <div className="flex items-center justify-around md:w-36 lg:w-52 2xl:w-80">
+    <RiPlayListAddFill
+      size={20}
+      color={repeat ? 'red' : 'white'}
+      onClick={() => console.log('adding the playlist')}
+      className="hidden sm:block cursor-pointer"
+    />
     <BsArrowRepeat
       size={20}
       color={repeat ? 'red' : 'white'}

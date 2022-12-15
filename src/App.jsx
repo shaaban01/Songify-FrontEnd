@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   Route,
   Routes,
   Navigate,
   matchRoutes,
   useLocation,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { Searchbar, Sidebar, MusicPlayer, TopPlay } from "./components";
+import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
 import {
   ArtistDetails,
   TopArtists,
@@ -18,14 +18,15 @@ import {
   TopCharts,
   Login,
   Signup,
-} from "./pages";
+  Playlists,
+} from './pages';
 const App = () => {
   const location = useLocation();
   console.log(location.pathname);
 
   const isAuthenticated =
-    localStorage.getItem("token") !== null &&
-    localStorage.getItem("token") !== undefined;
+    localStorage.getItem('token') !== null &&
+    localStorage.getItem('token') !== undefined;
   const { activeSong } = useSelector((state) => state.player);
 
   const PrivateRoute = ({ children }) => {
@@ -33,12 +34,17 @@ const App = () => {
   };
   return (
     <div className="relative flex ">
-      {isAuthenticated && location.pathname !== "/login" && <Sidebar />}
+      {isAuthenticated && location.pathname !== '/login' && <Sidebar />}
       <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#561E7C] h-screen	">
-        {isAuthenticated && location.pathname !== "/login" && <Searchbar />}
+        {isAuthenticated && location.pathname !== '/login' && <Searchbar />}
 
-        
-        <div className={ (location.pathname === "/register" || location.pathname === "/login")  ?"" : "px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse"}>
+        <div
+          className={
+            location.pathname === '/register' || location.pathname === '/login'
+              ? ''
+              : 'px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse'
+          }
+        >
           <div className="flex-1 h-fit pb-40">
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -101,9 +107,17 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+              <Route
+                path="/playlists"
+                element={
+                  <PrivateRoute>
+                    <Playlists />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </div>
-          {isAuthenticated && location.pathname !== "/login" && (
+          {isAuthenticated && location.pathname !== '/login' && (
             <div className="xl:sticky relative top-0 h-fit">
               <TopPlay />
             </div>
@@ -113,7 +127,7 @@ const App = () => {
 
       {activeSong?.title &&
         isAuthenticated &&
-        location.pathname !== "/login" && (
+        location.pathname !== '/login' && (
           <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
             <MusicPlayer />
           </div>
