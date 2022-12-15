@@ -32,9 +32,9 @@ const App = () => {
     return isAuthenticated ? children : <Navigate to="/login" />;
   };
   return (
-    <div className="relative flex">
+    <div className="relative flex ">
       {isAuthenticated && location.pathname !== "/login" && <Sidebar />}
-      <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#561E7C]">
+      <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#561E7C] h-screen	">
         {isAuthenticated && location.pathname !== "/login" && <Searchbar />}
 
         
