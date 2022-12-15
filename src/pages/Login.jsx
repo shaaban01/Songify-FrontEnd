@@ -68,7 +68,7 @@ function Login() {
         </button>
         
 
-        <Link to={`/register/`}>
+        <Link to={`/register`}>
           <p className="mt-6 mb-3 text-center block"> Don't have an account?</p>
         </Link>
       </div>

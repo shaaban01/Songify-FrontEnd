@@ -67,11 +67,8 @@ function Signup() {
         >
           Signup
         </button>
-        {/* <a href="./index.html" class="mt-6 mb-3 text-center block">
-          Already have an account?
-        </a> */}
-
-        <Link to={`/login/`}>
+        
+        <Link to={`/login`}>
           <p className="mt-6 mb-3 text-center block">
             {" "}
             Already have an account?
