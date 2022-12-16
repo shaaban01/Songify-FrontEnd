@@ -3,21 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 // import { Error, Loader, SongCard } from "../components";
 import { useGetSongDetailsQuery } from "../redux/services/shazamCore";
 
-const Playlist_info = (playlist) => {
-  //   const dispatch = useDispatch();
-  //   const { SongId } = useSelector((state) => state.player);
+const Playlist_info = (playlist_name, Playlist_song) => {
+  const dispatch = useDispatch();
+  const { SongId } = useSelector((state) => state.player);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetSongDetailsQuery(
-    554591360
+    Playlist_song[0]
   );
-  console.log(playlist);
-  console.log(playlist.playlist.name);
+  console.log(Playlist_song);
+
+  // console.log(data);
+  // console.log(playlist.playlist.name);
   return (
     // <></>
     <div>
-      <h2>{playlist.playlist.name}</h2>
-      <div className="flex flex-col">
-        {playlist.playlist.songs.map((ps, index) => (
+      <h1>{playlist_name}</h1>
+      <div className="flex">
+        {Playlist_song.map((ps, index) => (
           <SongCard
             song={ps}
             isPlaying={isPlaying}
